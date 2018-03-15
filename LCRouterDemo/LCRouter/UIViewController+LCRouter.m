@@ -55,6 +55,11 @@ static char LCBlock;
         }
     }else {   // 常规字符串 -> vc
         class = NSClassFromString(homeStr);
+        
+        if (class == nil) {
+            NSString *spaceName = [NSBundle mainBundle].infoDictionary[@"CFBundleExecutable"];
+            class =  NSClassFromString([NSString stringWithFormat:@"%@.%@",spaceName,homeStr]);
+        }
     }
     
     if (class != nil) {
